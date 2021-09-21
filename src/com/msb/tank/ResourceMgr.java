@@ -11,9 +11,17 @@ import java.io.IOException;
  * @Version:1.0
  */
 public class ResourceMgr {
+    private ResourceMgr(){}
+    private static ResourceMgr mgr = null;
     public static BufferedImage goodTankU,goodTankD,goodTankL,goodTankR,badTankU,badTankD,badTankL,badTankR;
     public static BufferedImage bulletU,bulletD,bulletL,bulletR;
     public static BufferedImage[] explodes = new BufferedImage[16];
+    public static ResourceMgr getResourceMgr(){
+        if(mgr == null){
+            mgr = new ResourceMgr();
+        }
+        return mgr;
+    }
     static{
         try {
             goodTankU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/GoodTank1.png"));

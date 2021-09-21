@@ -10,6 +10,14 @@ import java.util.Properties;
  * @Version:1.0
  */
 public class PropertyMgr {
+    private PropertyMgr(){}
+    private static PropertyMgr mgr = null;
+    public static PropertyMgr getPropertyMgr(){
+        if(mgr == null){
+            mgr = new PropertyMgr();
+        }
+        return mgr;
+    }
     static Properties prop = new Properties();
     static {
         try {
