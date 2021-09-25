@@ -1,4 +1,4 @@
-package com.msb.tank;
+package com.msb.tank.enums;
 
 /**
  * @Auther: AaronBerg

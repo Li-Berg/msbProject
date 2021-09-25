@@ -1,4 +1,8 @@
-package com.msb.tank;
+package com.msb.tank.explode;
+
+import com.msb.tank.utils.ResourceMgr;
+import com.msb.tank.frame.TankFrame;
+import com.msb.tank.tank.Tank;
 
 import java.awt.*;
 
@@ -8,7 +12,7 @@ import java.awt.*;
  * @Description:
  * @Version:1.0
  */
-public class Explode {
+public class Explode extends BaseExplode {
     public static int WIDTH = ResourceMgr.explodes[0].getWidth();
     public static int HEIGHT = ResourceMgr.explodes[0].getHeight();
     private int x,y;

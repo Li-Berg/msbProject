@@ -1,4 +1,4 @@
-package com.msb.tank;
+package com.msb.tank.utils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

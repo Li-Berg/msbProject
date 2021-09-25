@@ -1,4 +1,8 @@
-package com.msb.tank;
+package com.msb.tank.utils;
+
+import com.msb.tank.frame.TankFrame;
+import com.msb.tank.enums.Dir;
+import com.msb.tank.tank.Tank;
 
 /**
  * @Auther: AaronBerg
@@ -7,7 +11,7 @@ package com.msb.tank;
  * @Version:1.0
  */
 public class TankUtil {
-    public static int[] changeLocation(Dir dir, int x, int y, int speed,boolean canOut) {
+    public static int[] changeLocation(Dir dir, int x, int y, int speed, boolean canOut) {
         int[] res = new int[2];
         switch (dir) {
             case LEFT:
@@ -26,7 +30,7 @@ public class TankUtil {
         if(canOut == false) {
             if (x <= 0) x = 0;
             if (y <= 30) y = 30;
-            if (x >= TankFrame.getGameWidth()-Tank.WIDTH) x = TankFrame.getGameWidth() - Tank.WIDTH;
+            if (x >= TankFrame.getGameWidth()- Tank.WIDTH) x = TankFrame.getGameWidth() - Tank.WIDTH;
             if (y >= TankFrame.getGameHeight()-Tank.HEIGHT) y = TankFrame.getGameHeight() - Tank.HEIGHT;
         }
         res[0] = x;

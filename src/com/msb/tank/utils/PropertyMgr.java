@@ -1,4 +1,4 @@
-package com.msb.tank;
+package com.msb.tank.utils;
 
 import java.io.IOException;
 import java.util.Properties;

@@ -1,4 +1,4 @@
-package com.msb.tank;
+package com.msb.tank.utils;
 
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;

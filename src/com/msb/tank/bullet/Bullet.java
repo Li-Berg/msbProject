@@ -1,4 +1,13 @@
-package com.msb.tank;
+package com.msb.tank.bullet;
+
+import com.msb.tank.enums.Dir;
+import com.msb.tank.enums.Group;
+import com.msb.tank.frame.TankFrame;
+import com.msb.tank.game.factory.DefaultFactory;
+import com.msb.tank.game.factory.GameFactory;
+import com.msb.tank.tank.Tank;
+import com.msb.tank.utils.ResourceMgr;
+import com.msb.tank.utils.TankUtil;
 
 import java.awt.*;
 
@@ -8,7 +17,8 @@ import java.awt.*;
  * @Description:
  * @Version:1.0
  */
-public class Bullet {
+public class Bullet extends BaseBullet {
+    private GameFactory gf = new DefaultFactory();
     private static final int SPEED = 10;
     public static final int WIDTH = ResourceMgr.bulletD.getWidth();
     public static final int HEIGHT = ResourceMgr.bulletD.getHeight();
@@ -17,6 +27,18 @@ public class Bullet {
     private int x, y;
     private Dir dir;
     private Group group = Group.BAD;
+
+    public TankFrame getTf() {
+        return tf;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
 
     public int getX() {
         return x;
@@ -48,6 +70,7 @@ public class Bullet {
         this.dir = dir;
         this.tf = tf;
         this.group = group;
+        tf.getBulletList().add(this);
     }
 
     public void paintBullet(Graphics g) {
@@ -68,7 +91,7 @@ public class Bullet {
         move();
     }
 
-    private void move() {
+    protected void move() {
         int[] res = TankUtil.changeLocation(dir, x, y, SPEED,true);
         x = res[0];
         y = res[1];
@@ -86,11 +109,11 @@ public class Bullet {
         if (rectBullet.intersects(rectTank)){
             this.die();
             tank.die();
-            tf.getExplodeList().add(new Explode(tank.getX(), tank.getY(), tf));
+            tf.getExplodeList().add(gf.createExplode(tank.getX(), tank.getY(), tf));
         }
     }
 
-    private void die() {
+    protected void die() {
         this.isAlive = false;
     }
 }

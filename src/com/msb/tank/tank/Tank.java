@@ -1,4 +1,12 @@
-package com.msb.tank;
+package com.msb.tank.tank;
+
+import com.msb.tank.enums.Dir;
+import com.msb.tank.enums.Group;
+import com.msb.tank.fire.strategy.impl.DefaultFire;
+import com.msb.tank.fire.strategy.service.IFireStrategy;
+import com.msb.tank.frame.TankFrame;
+import com.msb.tank.utils.ResourceMgr;
+import com.msb.tank.utils.TankUtil;
 
 import java.awt.*;
 import java.util.Random;
@@ -9,11 +17,28 @@ import java.util.Random;
  * @Description:
  * @Version:1.0
  */
-public class Tank {
+public class Tank extends BaseTank {
     private static final int SPEED = 5;
     private boolean moving = true;
     private int x, y;
     private Dir dir;
+
+    public TankFrame getTf() {
+        return tf;
+    }
+
+    public void setTf(TankFrame tf) {
+        this.tf = tf;
+    }
+
+    public Dir getDir() {
+        return dir;
+    }
+
+    public void setDir(Dir dir) {
+        this.dir = dir;
+    }
+
     private TankFrame tf;
     public static final int WIDTH = ResourceMgr.goodTankD.getWidth();
     public static final int HEIGHT = ResourceMgr.goodTankD.getHeight();
@@ -56,7 +81,7 @@ public class Tank {
                     break;
             }
             if(this.group == Group.BAD && random.nextInt(100) > 95){
-                this.fire();
+                this.fire(DefaultFire.getDefaultFire());
             }
             randomDir();
         }
@@ -83,11 +108,8 @@ public class Tank {
         if (isRight) dir = Dir.RIGHT;
     }
 
-    public void fire() {
-        int bX = this.x + (Tank.WIDTH - Bullet.WIDTH)/2 + 1;
-        int bY = this.y + (Tank.HEIGHT - Bullet.HEIGHT)/2 - 1;
-        Bullet b = new Bullet(bX, bY, dir, tf,group);
-        tf.getBulletList().add(b);
+    public void fire(IFireStrategy ifs) {
+       ifs.fire( this);
     }
 
     public int getX() {
